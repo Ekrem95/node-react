@@ -15,11 +15,11 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 
 const User = require('./db/user');
 //app.locals.pretty = true;
-
+app.use(morgan('tiny'));
 app.use(sessions({
    cookieName: process.env.cookieName,
    secret: process.env.secret,
-   duration: 60 * 60 * 1000,
+   duration: 60 * 60 * 10000,
    activeDuration: 5 * 60 * 1000,
    httpOnly: true,
    secure: true,
@@ -48,6 +48,10 @@ app.use('/signup', require('./routes/signup'));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/tumblr", require("./routes/tumblr"));
 app.use('/api/tumblr', require("./routes/tumblrApi"))
+app.use('/api/posts', require("./routes/postApi"))
+app.use('/add', require("./routes/post.js"))
+app.use('/p', require("./routes/edit.js"))
+
 
 app.get("/logout", (req, res) => {
    req.session.reset();
@@ -60,6 +64,10 @@ app.get('/api/isloggedin', (req, res) => {
   } else{
     res.send('no')
   }
+})
+
+app.use('', (req, res) => {
+  res.sendFile(path.join(__dirname, './public', 'NotFound.html'));
 })
 
 app.listen(process.env.PORT || 3000);

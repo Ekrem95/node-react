@@ -17,12 +17,16 @@ export default class Nav extends Component {
           to="/dashboard"
           className="link"
           >Dashboard</Link></li>
-        <li><a href="logout">Logout</a></li>
         <li><Link
           to="/tumblr"
           className="link"
           >Tumblr</Link></li>
-        <li><a href="logout">Logout</a></li>
+        <li><Link
+          to="/add"
+          className="link"
+          >Add</Link></li>
+
+        <li><a className="logout" href="logout">Logout</a></li>
       </div>
     )
   }
