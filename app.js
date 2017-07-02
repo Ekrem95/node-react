@@ -66,7 +66,7 @@ app.get('/api/isloggedin', (req, res) => {
   }
 })
 
-app.use('', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'NotFound.html'));
 })
 
