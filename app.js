@@ -51,6 +51,7 @@ app.use('/api/tumblr', require("./routes/tumblrApi"))
 app.use('/api/posts', require("./routes/postApi"))
 app.use('/add', require("./routes/post.js"))
 app.use('/p', require("./routes/edit.js"))
+app.use('/changepassword', require("./routes/password.js"))
 
 
 app.get("/logout", (req, res) => {

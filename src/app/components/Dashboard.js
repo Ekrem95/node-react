@@ -7,6 +7,7 @@ export default class Dashboard extends Component {
     super();
     this.state = {
       data: {},
+      user: {},
     }
   }
   componentWillMount( nextState, transition ) {
@@ -32,12 +33,34 @@ export default class Dashboard extends Component {
       .catch(err => {
         console.log(err);
       })
+
+      axios.get('p/usr')
+        .then(res => {
+          this.setState({
+            user: res.data
+          })
+          //console.log(this.state.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
   }
 
   render () {
     return (
       <div>
         <h1>Dashboard</h1>
+
+        {this.state.user &&
+          <div>
+          <p>{this.state.user.email}</p>
+          <Link
+            to="/changepassword"
+            style={{color: '#fff', textDecoration: 'none'}}
+            >Change password</Link>
+          </div>
+        }
+
         { this.state.data.data &&
           this.state.data.data.map(post => {
             return (

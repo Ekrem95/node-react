@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import Tumblr from './components/Tumblr';
 import Add from './components/Add';
 import Edit from './components/Edit';
+import Password from './components/Password';
 
 class App extends Component {
   render () {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/tumblr" component={Tumblr} />
           <Route path="/add" component={Add} />
           <Route path="/p/*" component={Edit} />
+          <Route path="/changepassword" component={Password} />
         </div>
       </BrowserRouter>
     )

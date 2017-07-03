@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
   var user = new User({
-     username: req.body.username,
      email: req.body.email,
      password: hash
   });
+  console.log(user);
   user.save(err => {
    if(err){
      if(err.code === 11000){
