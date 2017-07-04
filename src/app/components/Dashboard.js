@@ -8,7 +8,9 @@ export default class Dashboard extends Component {
     this.state = {
       data: {},
       user: {},
+      fetched: {},
     }
+    this.onChange = this.onChange.bind(this);
   }
   componentWillMount( nextState, transition ) {
     axios.get('api/isloggedin')
@@ -26,9 +28,9 @@ export default class Dashboard extends Component {
     axios.get('api/posts')
       .then(res => {
         this.setState({
-          data: res
+          data: res,
+          fetched: res.data,
         })
-        //console.log(this.state.data);
       })
       .catch(err => {
         console.log(err);
@@ -39,11 +41,26 @@ export default class Dashboard extends Component {
           this.setState({
             user: res.data
           })
-          //console.log(this.state.data);
         })
         .catch(err => {
           console.log(err);
         })
+  }
+
+  onChange (e) {
+    const val = e.target.value.toLowerCase();
+    if(this.state.data) {
+      let data = this.state.data.data;
+      if(data) {
+        data.data = this.state.fetched.filter(post => {
+          //return JSON.stringify(post).toLowerCase().indexOf(val) !== -1;
+          return JSON.stringify(post).toLowerCase().includes(val);
+        })
+        this.setState({
+          data: data,
+        })
+      }
+    }
   }
 
   render () {
@@ -58,6 +75,8 @@ export default class Dashboard extends Component {
             to="/changepassword"
             style={{color: '#fff', textDecoration: 'none'}}
             >Change password</Link>
+          <br/>
+            <textarea onChange={this.onChange}></textarea>
           </div>
         }
 
