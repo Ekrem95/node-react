@@ -47,8 +47,7 @@ app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/tumblr", require("./routes/tumblr"));
-app.use('/api/tumblr', require("./routes/tumblrApi"))
-app.use('/api/posts', require("./routes/postApi"))
+app.use('/api', require("./routes/api"))
 app.use('/add', require("./routes/post.js"))
 app.use('/p', require("./routes/edit.js"))
 app.use('/changepassword', require("./routes/password.js"))
@@ -58,14 +57,6 @@ app.get("/logout", (req, res) => {
    req.session.reset();
    res.redirect("/");
 });
-
-app.get('/api/isloggedin', (req, res) => {
-  if(req.user) {
-    res.send('yes')
-  } else{
-    res.send('no')
-  }
-})
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'NotFound.html'));
