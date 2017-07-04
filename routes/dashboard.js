@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 router.get('/', requireLogin, (req, res) => {
-  console.log(req.user);
+  //console.log(req.user);
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 

@@ -24,7 +24,7 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/tumblr" component={Tumblr} />
           <Route path="/add" component={Add} />
-          <Route path="/p/*" component={Edit} />
+          <Route path="/p/:id" component={Edit} />
           <Route path="/changepassword" component={Password} />
         </div>
       </BrowserRouter>

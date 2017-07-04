@@ -4,7 +4,9 @@ const bcrypt = require('bcryptjs');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const sessions = require('client-sessions');
+const compression = require('compression');
 const dotenv = require('dotenv');
+const favicon = require('serve-favicon');
 const path = require('path');
 
 dotenv.load();
@@ -12,10 +14,12 @@ dotenv.load();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'src/public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 const User = require('./db/user');
 //app.locals.pretty = true;
 app.use(morgan('tiny'));
+app.use(compression());
 app.use(sessions({
   cookieName: process.env.cookieName,
   secret: process.env.secret,

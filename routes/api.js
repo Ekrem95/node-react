@@ -20,7 +20,7 @@ router.get('/posts', (req, res) => {
   Post.find({}, function (err, obj) {
     if (err)console.log(err);
     res.send(obj);
-  });
+  }).sort({ _id: -1 });
 });
 
 router.get('/isloggedin', (req, res) => {
