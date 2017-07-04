@@ -7,20 +7,20 @@ export default class Edit extends Component {
     super();
     this.state = {
       data: {},
-    }
+    };
   }
 
-  componentWillMount( nextState, transition ) {
+  componentWillMount(nextState, transition) {
     //console.log(this.props.location.pathname.slice(3));
     axios.get('api/' + this.props.location.pathname.slice(3))
       .then(res => {
         this.setState({
-          data: res
-        })
+          data: res,
+        });
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
 
   render () {
@@ -40,6 +40,6 @@ export default class Edit extends Component {
     }
 
       </div>
-    )
+    );
   }
 }

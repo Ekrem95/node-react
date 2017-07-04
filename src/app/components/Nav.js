@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,26 +6,26 @@ export default class Nav extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn : Boolean,
-    }
+      loggedIn: Boolean,
+    };
   }
 
-  componentWillMount( nextState, transition ) {
+  componentWillMount(nextState, transition) {
     axios.get('api/isloggedin')
       .then(res => {
-        if(res.data == 'no') {
-           this.setState({
-             loggedIn: false
-           })
+        if (res.data == 'no') {
+          this.setState({
+            loggedIn: false,
+          });
         } else {
           this.setState({
-            loggedIn: true
-          })
+            loggedIn: true,
+          });
         }
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
 
   render () {
@@ -65,6 +65,6 @@ export default class Nav extends Component {
         }
 
       </div>
-    )
+    );
   }
 }

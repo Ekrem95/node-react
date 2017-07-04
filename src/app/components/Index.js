@@ -14,15 +14,15 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount(nextState, transition) {
-    axios.get('api/isloggedin')
-      .then(res => {
-        if (res.data == 'no') {
-          window.location.replace('/login');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios.get('api/isloggedin')
+    //   .then(res => {
+    //     if (res.data == 'no') {
+    //       window.location.replace('/login');
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
   componentDidMount(nextState, transition) {
@@ -67,8 +67,6 @@ export default class Dashboard extends Component {
   render () {
     return (
       <div>
-        <h1>Dashboard</h1>
-
         {this.state.user &&
           <div>
           <p>{this.state.user.email}</p>

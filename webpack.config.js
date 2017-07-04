@@ -8,7 +8,7 @@ const config = {
   entry: APP_DIR + '/app.js',
   output: {
     path: BUILT_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [
@@ -17,11 +17,11 @@ const config = {
         include: APP_DIR,
         loader: 'babel-loader',
         query: {
-          presets:['react']
-        }
-      }
-    ]
-  }
+          presets: ['react'],
+        },
+      },
+    ],
+  },
 };
 
 module.exports = config;

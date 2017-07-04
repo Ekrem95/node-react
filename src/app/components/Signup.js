@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Signup extends Component {
   render () {
@@ -11,6 +11,6 @@ export default class Signup extends Component {
           <button type="submit">Submit</button>
         </form>
       </div>
-    )
+    );
   }
 }
