@@ -2,95 +2,49 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export default class Dashboard extends Component {
+export default class Index extends Component {
   constructor() {
     super();
     this.state = {
       data: {},
-      user: {},
-      fetched: {},
     };
-    this.onChange = this.onChange.bind(this);
   }
 
-  componentWillMount(nextState, transition) {
-    // axios.get('api/isloggedin')
-    //   .then(res => {
-    //     if (res.data == 'no') {
-    //       window.location.replace('/login');
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  }
-
-  componentDidMount(nextState, transition) {
+  componentWillMount() {
     axios.get('api/posts')
       .then(res => {
         this.setState({
-          data: res,
-          fetched: res.data,
+          data: res.data,
         });
+        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
       });
-
-    axios.get('p/usr')
-      .then(res => {
-        this.setState({
-          user: res.data,
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  onChange (e) {
-    const val = e.target.value.toLowerCase();
-    if (this.state.data) {
-      let data = this.state.data.data;
-      if (data) {
-        data.data = this.state.fetched.filter(post => {
-          //return JSON.stringify(post).toLowerCase().indexOf(val) !== -1;
-          return JSON.stringify(post).toLowerCase().includes(val);
-        });
-        this.setState({
-          data: data,
-        });
-      }
-    }
   }
 
   render () {
+    console.log(this.state.data);
     return (
       <div>
-        {this.state.user &&
-          <div>
-          <p>{this.state.user.email}</p>
-          <Link
-            to="/changepassword"
-            style={{ color: '#fff', textDecoration: 'none' }}
-            >Change password</Link>
-          <br/>
-            <textarea onChange={this.onChange}></textarea>
-          </div>
-        }
+        <div style={{
+          flex: 1, flexDirection: 'row', margin: 10,
 
-        { this.state.data.data &&
-          this.state.data.data.map(post => {
-            return (
-              <div className="post" key={post._id}>
-                <h3>{post.title}</h3>
-                <p>{post.desc}</p>
-                <img src={post.src}/>
-                <Link to={'/p/' + post._id}><button>Edit</button></Link>
-              </div>
-            );
-          })
-        }
+        }}>
+          { this.state.data.length > 0 &&
+            this.state.data.map(act => {
+              return (
+                <img
+                  key={act._id}
+                  style={{
+                    width: 200, height: 200, margin: 10,
+                  }}
+                  src={act.src}
+                />
+              );
+            })
+          }
+        </div>
       </div>
     );
   }
