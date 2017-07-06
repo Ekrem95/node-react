@@ -4,10 +4,9 @@ const path = require('path');
 const Post = require('../db/post');
 const User = require('../db/user');
 
-
-// router.get('/:id', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../public', 'index.html'));
-// });
+router.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
 
 router.post('/', (req, res) => {
   const id = req.headers.referer.split('/').pop();

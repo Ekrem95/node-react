@@ -11,12 +11,12 @@ export default class Index extends Component {
   }
 
   componentWillMount() {
-    axios.get('api/posts')
+    axios.get('/api/posts')
       .then(res => {
         this.setState({
           data: res.data,
         });
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -24,12 +24,11 @@ export default class Index extends Component {
   }
 
   render () {
-    console.log(this.state.data);
+    //console.log(this.state.data);
     return (
       <div>
         <div style={{
           flex: 1, flexDirection: 'row', margin: 10,
-
         }}>
           { this.state.data.length > 0 &&
             this.state.data.map(act => {

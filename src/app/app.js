@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 import Index from './components/Index';
 import Signup from './components/Signup';
@@ -11,6 +11,7 @@ import Tumblr from './components/Tumblr';
 import Add from './components/Add';
 import Edit from './components/Edit';
 import Password from './components/Password';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   render () {
@@ -18,14 +19,17 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Nav />
-          <Route exact path="/" component={Index} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/tumblr" component={Tumblr} />
-          <Route path="/add" component={Add} />
-          <Route path="/p/:id" component={Edit} />
-          <Route path="/changepassword" component={Password} />
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/tumblr" component={Tumblr} />
+            <Route path="/add" component={Add} />
+            <Route path="/p/:id" component={Edit} />
+            <Route path="/changepassword" component={Password} />
+            <Route path="*" component={NotFound}/>
+          </Switch>
         </div>
       </BrowserRouter>
     );
