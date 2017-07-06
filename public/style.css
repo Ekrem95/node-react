@@ -70,18 +70,29 @@ body{
 .post h3{
   margin-left: 20px;
 }
-.post button{
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+.post button, .cBtn{
   font-size: 1.2rem;
   background: rgb(40, 142, 47);
   color: #fff;
   border: 0;
   border-radius: 2px;
 }
-.post button:hover{
+.post button.secondButton{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.post button.firstButton{
+  position: absolute;
+  bottom: 10px;
+  right: 60px;
+}
+.post button:hover, .cBtn:hover{
   background: rgb(40, 102, 47);
+}
+.cBtn{
+  display: block;
+  margin-top: 10px;
 }
 textarea{
   resize: none;

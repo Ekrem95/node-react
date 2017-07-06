@@ -9,7 +9,7 @@ const Post = mongoose.model('Post', new Schema({
   title: String,
   desc: String,
   src: String,
-  comments: Array,
+  comments: [],
 }));
 
 module.exports = Post;

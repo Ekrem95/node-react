@@ -88,7 +88,12 @@ export default class Dashboard extends Component {
                 <h3>{post.title}</h3>
                 <p>{post.desc}</p>
                 <img src={post.src}/>
-                <Link to={'/p/' + post._id}><button>Edit</button></Link>
+                <Link to={'/p/d/' + post._id}>
+                  <button className="firstButton">Details</button>
+                </Link>
+                <Link to={'/p/' + post._id}>
+                  <button className="secondButton">Edit</button>
+                </Link>
               </div>
             );
           })

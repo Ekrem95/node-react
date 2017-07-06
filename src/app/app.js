@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import Nav from './components/Nav';
 import Tumblr from './components/Tumblr';
 import Add from './components/Add';
+import Details from './components/Details';
 import Edit from './components/Edit';
 import Password from './components/Password';
 import NotFound from './components/NotFound';
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/tumblr" component={Tumblr} />
             <Route path="/add" component={Add} />
+            <Route path="/p/d/:id" component={Details} />
             <Route path="/p/:id" component={Edit} />
             <Route path="/changepassword" component={Password} />
             <Route path="*" component={NotFound}/>

@@ -73,6 +73,24 @@ router.post('/p', (req, res) => {
 
   res.redirect('/dashboard');
 });
+router.post('/p/d', (req, res) => {
+  if (req.body.box.length > 0) {
+    const id = req.headers.referer.split('/').pop();
+    Post.update({
+      _id: id,
+    }, {
+      $push: {
+        comments: req.body.box,
+      }, },
+    { upsert: false }, function (err, doc) {
+      if (err) console.log(err);
+    });
+
+    res.redirect('/dashboard');
+  } else {
+    res.redirect('/dashboard');
+  }
+});
 
 router.post('/add', (req, res) => {
   var post = new Post({
