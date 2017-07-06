@@ -28,28 +28,4 @@ router.post('/', (req, res) => {
 //   res.send(req.params.id);
 // });
 
-router.get('/api/:id', (req, res) => {
-  Post.findById(req.params.id, function (err, p) {
-    if (!p)
-      return (new Error('Could not load Document'));
-    else {
-      res.send(p);
-    }
-  });
-});
-
-router.get('/usr', (req, res) => {
-  if (!req.user) {
-    res.redirect('/login');
-  } else {
-    User.findById(req.user._id, function (err, u) {
-      if (!u)
-        return (new Error('Could not load Document'));
-      else {
-        res.send(u);
-      }
-    });
-  }
-});
-
 module.exports = router;

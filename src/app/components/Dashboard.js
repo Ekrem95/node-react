@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
         console.log(err);
       });
 
-    axios.get('p/usr')
+    axios.get('api/usr')
       .then(res => {
         this.setState({
           user: res.data,

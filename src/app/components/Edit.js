@@ -12,7 +12,7 @@ export default class Edit extends Component {
 
   componentWillMount(nextState, transition) {
     //console.log(this.props.location.pathname.slice(3));
-    axios.get('api/' + this.props.location.pathname.slice(3))
+    axios.get('/api/' + this.props.location.pathname.slice(3))
       .then(res => {
         this.setState({
           data: res,

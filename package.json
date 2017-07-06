@@ -3,7 +3,7 @@
     "start": "node app.js",
     "build": "babel ./lib -d dist --presets es2015,stage-2",
     "serve": "nodemon app.js --exec babel-node --presets es2015,stage-2",
-    "test": "mocha --compilers js:babel-register",
+    "test": "mocha --compilers js:babel-register 'test/*.js'",
     "dev": "webpack -d --watch",
     "build-r": "webpack -p"
   },
