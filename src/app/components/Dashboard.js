@@ -72,10 +72,9 @@ export default class Dashboard extends Component {
         {this.state.user &&
           <div>
           <p>{this.state.user.email}</p>
-          <Link
+          <p className="passwordLink"><Link
             to="/changepassword"
-            style={{ color: '#fff', textDecoration: 'none' }}
-            >Change password</Link>
+            >Change password</Link></p>
           <br/>
             <textarea onChange={this.onChange}></textarea>
           </div>

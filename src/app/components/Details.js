@@ -23,7 +23,7 @@ export default class Details extends Component {
 
   render () {
     const data = this.state.data;
-    console.log(data);
+    //console.log(data);
     return (
       <div style={{
         display: 'flex',
@@ -56,9 +56,9 @@ export default class Details extends Component {
             <button className="cBtn">Send</button>
             </form>
             { data.comments &&
-              data.comments.map(comment => {
+              data.comments.map((comment, i) => {
                 return (
-                  <p>{comment}</p>
+                  <p key={i}>{comment}</p>
                 );
               })
             }

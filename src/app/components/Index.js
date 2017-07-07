@@ -27,17 +27,15 @@ export default class Index extends Component {
     //console.log(this.state.data);
     return (
       <div>
-        <div style={{
-          flex: 1, flexDirection: 'row', margin: 10,
-        }}>
+        <div
+          className="indexContainer"
+          >
           { this.state.data.length > 0 &&
             this.state.data.map(act => {
               return (
                 <img
                   key={act._id}
-                  style={{
-                    width: 200, height: 200, margin: 10,
-                  }}
+                  className="indexImg"
                   src={act.src}
                 />
               );

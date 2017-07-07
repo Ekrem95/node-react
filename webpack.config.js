@@ -23,7 +23,8 @@ const config = {
       },
     ],
   },
-  devtool: '#source-map',
+  devtool: 'inline-sourcemap',
+  // devtool: '#source-map',
 };
 
 module.exports = config;
