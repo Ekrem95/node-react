@@ -26,7 +26,7 @@ export default class Tumblr extends Component {
     return (
       <div>
         <h1>Tumblr</h1>
-        <div style={{ textAlign: 'center' }}>
+        <div className="tumblrContainer">
           { this.state.data.data &&
              this.state.data.data.map(post => {
               return <img

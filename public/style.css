@@ -191,4 +191,9 @@ textarea{
     width: 76%;
     margin-bottom: 0;
   }
+  .tumblr-img{
+    width: 76%;
+    margin: 10px;
+    padding: 60px;
+  }
 }
