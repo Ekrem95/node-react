@@ -20,6 +20,7 @@ app.use(compression());
 app.use(require('./middleware/middleware').sessions);
 app.use(require('./middleware/middleware').userSession);
 
+app.use('/add/file', require('./routes/file'));
 app.use('/api', require('./routes/api'));
 app.use('/', require('./routes/router'));
 

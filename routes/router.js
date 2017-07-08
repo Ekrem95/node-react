@@ -66,6 +66,7 @@ router.post('/p', (req, res) => {
     $set: {
       title: req.body.title,
       desc: req.body.desc,
+      src: req.body.src,
     }, },
 { upsert: false }, function (err, doc) {
     if (err) console.log(err);

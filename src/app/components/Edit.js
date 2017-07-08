@@ -32,8 +32,8 @@ export default class Edit extends Component {
 
             <form method="post" action="/p" className="addPost">
               <input defaultValue={data.title} type="text" name="title" placeholder="Title"/>
-              <input defaultValue={data.src} type="text" name="src" placeholder="Image Source"/>
               <input defaultValue={data.desc} type="text" name="desc" placeholder="Description"/>
+              <input defaultValue={data.src} type="text" name="src" placeholder="Image Source"/>
               <button type="submit">Edit</button>
             </form>
 
