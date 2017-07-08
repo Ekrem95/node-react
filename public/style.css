@@ -54,6 +54,7 @@ body{
 }
 .post img{
   width: 300px;
+  object-fit: cover;
   float: left;
   display: block;
   margin-bottom: 50px;
@@ -104,6 +105,7 @@ textarea{
   width: 200px;
   height: 200px;
   margin: 10px;
+  object-fit: cover;
 }
 .indexContainer{
   display: -webkit-box;
@@ -150,6 +152,7 @@ textarea{
   .indexImg{
     width: 360px;
     height: 360px;
+    object-fit: cover;
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
@@ -210,6 +213,7 @@ textarea{
   .post img{
     width: 76%;
     margin-bottom: 0;
+    object-fit: cover;
   }
   .tumblr-img{
     width: 76%;

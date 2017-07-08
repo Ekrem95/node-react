@@ -74,6 +74,7 @@ router.post('/p', (req, res) => {
 
   res.redirect('/dashboard');
 });
+
 router.post('/p/d', (req, res) => {
   if (req.body.box.length > 0) {
     const id = req.headers.referer.split('/').pop();

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import request from 'superagent';
 
 export default class Details extends Component {
   constructor () {
@@ -7,6 +8,7 @@ export default class Details extends Component {
     this.state = {
       data: {},
     };
+    this.sendComment = this.sendComment.bind(this);
   }
 
   componentWillMount () {
@@ -19,6 +21,29 @@ export default class Details extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  sendComment (e) {
+    e.preventDefault();
+
+    const comment = document.getElementById('textarea').value;
+    document.getElementById('textarea').value = '';
+
+    const data = this.state.data;
+    data.comments.push(comment);
+
+    this.setState({
+      data: data,
+    });
+
+    request
+      .post('/p/d')
+      .type('form')
+      .send({ box: comment }) // sends a JSON post body
+      .set('Accept', 'application/json')
+      .end(function (err, res) {
+      // Calling the end function will send the request
+    });
   }
 
   render () {
@@ -37,6 +62,7 @@ export default class Details extends Component {
           style={{
             width: 500,
             height: 500,
+            objectFit: 'cover',
           }}
           src={data.src}/>
         <p
@@ -44,8 +70,9 @@ export default class Details extends Component {
             width: 500,
           }}
           >{data.desc}</p>
-          <form method="post" action="/p/d">
+          <form>
           <textarea
+            id="textarea"
             name="box"
             style={{
               width: 360,
@@ -53,7 +80,9 @@ export default class Details extends Component {
             }}
             placeholder="Type here to post a comment"
             ></textarea>
-            <button className="cBtn">Send</button>
+            <button
+              onClick={this.sendComment}
+              className="cBtn">Send</button>
             </form>
             { data.comments &&
               data.comments.map((comment, i) => {
