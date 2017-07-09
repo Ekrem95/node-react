@@ -13,14 +13,17 @@ export default class AddFile extends Component {
   }
 
   onDrop(files) {
-    console.log('Received files: ', files);
-    var req = request.post('/add/file');
-    files.forEach((file)=> {
-        req.attach(file.name, file);
+
+    var photo = new FormData();
+    photo.append('photo', files[0]);
+
+    request.post('/add/file')
+      .send(photo)
+      .end(function (err, resp) {
+        if (err) { console.error(err); }
+
+        return resp;
       });
-    req.end(
-      console.log('Done')
-    );
   }
 
   onOpenClick(files) {
@@ -30,7 +33,7 @@ export default class AddFile extends Component {
   render() {
     return (
       <div>
-         <Dropzone ref="dropzone" onDrop={this.onDrop} >
+         <Dropzone ref="dropzone" multiple={false} accept={'image/*'} onDrop={this.onDrop} >
            <div>Try dropping some files here, or click to select files to upload.</div>
          </Dropzone>
          <button type="button" onClick={this.onOpenClick}>
