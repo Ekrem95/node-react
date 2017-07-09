@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcryptjs');
+var multer = require('multer');
 const User = require('../db/user');
 const Post = require('../db/post');
 
@@ -109,6 +110,22 @@ router.post('/add', (req, res) => {
       res.redirect('/dashboard');
     }
   });
+});
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/pictures');
+  },
+
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+var upload = multer({ storage: storage });
+
+router.post('/add/file', upload.any(), (req, res) => {
+  res.redirect('/');
 });
 
 router.post('/changepassword', (req, res) => {

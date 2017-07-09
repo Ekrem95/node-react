@@ -13,7 +13,6 @@ export default class AddFile extends Component {
   }
 
   onDrop(files) {
-
     var photo = new FormData();
     photo.append('photo', files[0]);
 
