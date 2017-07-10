@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-mongoose.connect('mongodb://localhost/react');
+mongoose.connect(process.env.mongoDb);
 
 const User = mongoose.model('User', new Schema({
   id: ObjectId,
