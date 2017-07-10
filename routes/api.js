@@ -24,6 +24,22 @@ router.get('/posts', (req, res) => {
   }).sort({ _id: -1 });
 });
 
+router.get('/posts/:skip', (req, res) => {
+  Post.find({}, function (err, obj) {
+    if (err)console.log(err);
+    res.send(obj);
+  }).sort({ _id: -1 })
+    .limit(5)
+    .skip(Number(req.params.skip) || 0);
+});
+
+router.get('/count/posts', (req, res) => {
+  Post.count({}, function (err, num) {
+    if (err)console.log(err);
+    res.send(num + '');
+  });
+});
+
 router.get('/isloggedin', (req, res) => {
   if (req.user) {
     res.send('yes');

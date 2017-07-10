@@ -9,8 +9,11 @@ export default class Dashboard extends Component {
       data: {},
       user: {},
       fetched: {},
+      skip: 0,
+      length: 5,
     };
     this.onChange = this.onChange.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
 
   componentWillMount(nextState, transition) {
@@ -26,7 +29,7 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(nextState, transition) {
-    axios.get('api/posts')
+    axios.get('api/posts/0')
       .then(res => {
         this.setState({
           data: res,
@@ -46,9 +49,19 @@ export default class Dashboard extends Component {
       .catch(err => {
         console.log(err);
       });
+
+    axios.get('api/count/posts')
+      .then(res => {
+        this.setState({
+          length: res.data,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  onChange (e) {
+  onChange(e) {
     const val = e.target.value.toLowerCase();
     if (this.state.data) {
       let data = this.state.data.data;
@@ -64,7 +77,27 @@ export default class Dashboard extends Component {
     }
   }
 
-  render () {
+  loadMore() {
+    this.setState({
+      skip: this.state.skip + 5,
+    });
+    const skip = (this.state.skip + 5).toString();
+    axios.get('api/posts/' + skip)
+      .then(res => {
+        const data = this.state.data;
+        res.data.forEach(post => {
+          data.data.push(post);
+        });
+        this.setState({
+          data: data,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
     return (
       <div>
         <h1>Dashboard</h1>
@@ -96,6 +129,10 @@ export default class Dashboard extends Component {
               </div>
             );
           })
+        }
+        {
+          this.state.skip + 5 < this.state.length &&
+          <button onClick={this.loadMore}>Load More</button>
         }
       </div>
     );
