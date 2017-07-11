@@ -132,7 +132,8 @@ textarea{
 @media (max-width: 600px) {
   #app{
     width: 100%;
-    min-width: 400px;
+    min-width: 360px;
+    overflow-x: hidden;
   }
   .indexContainer{
     display: -webkit-box;

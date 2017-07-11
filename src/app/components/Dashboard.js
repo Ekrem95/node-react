@@ -14,6 +14,7 @@ export default class Dashboard extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.scroll = this.scroll.bind(this);
   }
 
   componentWillMount(nextState, transition) {
@@ -97,9 +98,18 @@ export default class Dashboard extends Component {
       });
   }
 
+  scroll(node) {
+    const self = this;
+    window.onscroll = function (e) {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        self.loadMore();
+      }
+    };
+  };
+
   render() {
     return (
-      <div>
+      <div ref={this.scroll}>
         <h1>Dashboard</h1>
 
         {this.state.user &&
