@@ -78,7 +78,7 @@ router.post('/p', (req, res) => {
 
 router.post('/p/d', (req, res) => {
   if (req.body.box.length > 0) {
-    const id = req.headers.referer.split('/').pop();
+    const id = req.body.id || req.headers.referer.split('/').pop();
     Post.update({
       _id: id,
     }, {
