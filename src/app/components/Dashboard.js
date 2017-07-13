@@ -82,7 +82,7 @@ export default class Dashboard extends Component {
     this.setState({
       skip: this.state.skip + 5,
     });
-    const skip = (this.state.skip + 5).toString();
+    const skip = (this.state.skip).toString();
     axios.get('api/posts/' + skip)
       .then(res => {
         const data = this.state.data;
