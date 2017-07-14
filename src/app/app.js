@@ -7,7 +7,6 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Nav from './components/Nav';
-import Tumblr from './components/Tumblr';
 import Add from './components/Add';
 import AddFile from './components/AddFile';
 import Details from './components/Details';
@@ -26,7 +25,6 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/tumblr" component={Tumblr} />
             <Route exact path="/add" component={Add} />
             <Route exact path="/add/file" component={AddFile} />
             <Route path="/p/d/:id" component={Details} />

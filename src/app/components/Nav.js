@@ -35,6 +35,10 @@ export default class Nav extends Component {
           !this.state.loggedIn &&
           <div>
           <li><Link
+            to="/"
+            className="link"
+            >X</Link></li>
+          <li><Link
             to="/signup"
             className="link"
             >Signup</Link></li>
@@ -48,13 +52,13 @@ export default class Nav extends Component {
           this.state.loggedIn &&
           <div>
           <li><Link
+            to="/"
+            className="link"
+            >X</Link></li>
+          <li><Link
             to="/dashboard"
             className="link"
             >Dashboard</Link></li>
-          <li><Link
-            to="/tumblr"
-            className="link"
-            >Tumblr</Link></li>
           <li><Link
             to="/add"
             className="link"

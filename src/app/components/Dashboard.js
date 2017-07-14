@@ -109,15 +109,13 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div ref={this.scroll}>
-        <h1>Dashboard</h1>
-
+      <div className="dashboard" ref={this.scroll}>
         {this.state.user &&
-          <div>
-          <p>{this.state.user.email}</p>
-          <p className="passwordLink"><Link
-            to="/changepassword"
-            >Change password</Link></p>
+          <div className="dashboardFirst">
+          <p className="passwordLink">
+            <Link
+              to="/changepassword"
+              >{this.state.user.email}</Link></p>
           <br/>
             <textarea onChange={this.onChange}></textarea>
           </div>

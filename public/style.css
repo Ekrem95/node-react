@@ -54,12 +54,14 @@ body{
 }
 .post img{
   width: 300px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   float: left;
   display: block;
-  margin-bottom: 50px;
-  height: 300px;
+  margin-bottom: 40px;
   margin-left: 20px;
+  height: 300px;
+  align-self: center;
 }
 .post p{
   float: left;
@@ -67,6 +69,7 @@ body{
   width: 300px;
   margin-left: 20px;
   margin-right: 0;
+  text-align: justify;
 }
 .post h3{
   margin-left: 20px;
@@ -104,8 +107,9 @@ textarea{
 .indexImg{
   width: 200px;
   height: 200px;
-  margin: 10px;
-  object-fit: cover;
+  margin: 6px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .indexContainer{
   display: -webkit-box;
@@ -122,14 +126,56 @@ textarea{
           flex-flow: row wrap;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: flex-start;
+          justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+}
+.dashboard h1, .dashboardFirst{
+  margin-left: 46px;
 }
 .passwordLink *{
   color: #fff;
   text-decoration: none;
 }
-
+.postform{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.postform input, .postform button{
+  display: block;
+  width: 260px;
+  margin: 20px 20px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  border-radius: 3px;
+}
+.postform input{
+  padding-left: 10px;
+  font-size: 1.2em;
+  height: 32px;
+}
+.postform button{
+  background-color: rgb(23, 97, 173);
+  color: #fff;
+  border: none;
+  height: 36px;
+}
 @media (max-width: 600px) {
+  html{
+    width: 100vw;
+  }
   #app{
     width: 100%;
     min-width: 360px;
@@ -150,14 +196,26 @@ textarea{
         -ms-flex-align: center;
             align-items: center;
   }
+
   .indexImg{
     width: 360px;
     height: 360px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-  }h1{
+  }
+  .dashboardFirst p, .passwordLink *{
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+  }
+  .dashboardFirst{
+    width: 400px;
+    margin: 0;
+  }
+  h1{
     text-align: center;
     margin-top: 60px;
   }
@@ -180,7 +238,7 @@ textarea{
     max-width: 500px;
     width: 96%;
     margin: 10px auto;
-    min-height: 560px;
+    min-height: 540px;
     border-bottom: 1px solid;
     border-right: 1px solid;
     position: relative;
@@ -196,14 +254,13 @@ textarea{
     bottom: 20px;
     left: 80px;
   }
-  p, .passwordLink *{
-    text-align: center;
-    color: #fff;
-    text-decoration: none;
-  }
   textarea{
     margin: 0 20%;
     width: 60%;
+  }
+  .logout{
+    position: absolute;
+    right: 5vw;
   }
   .post p{
     width: 90%;
@@ -212,9 +269,10 @@ textarea{
     overflow:hidden;
   }
   .post img{
-    width: 76%;
+    width: 90%;
     margin-bottom: 0;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .tumblr-img{
     width: 76%;
