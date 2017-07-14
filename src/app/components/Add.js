@@ -13,7 +13,8 @@ export default class Add extends Component {
             color: '#fff',
             textDecoration: 'none',
           }}
-          to="/add/file"><h3>Add File</h3></Link>
+          to="/add/file">
+          <h3 className="addfile">Add File</h3></Link>
         <form method="post" action="/add" className="addPost">
           <input type="text" name="title" placeholder="Title"/>
           <input type="text" name="desc" placeholder="Description"/>

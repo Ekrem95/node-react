@@ -60,14 +60,13 @@ export default class Details extends Component {
         <h1>{data.title}</h1>
         <img
           style={{
-            width: 500,
-            height: 500,
+            width: '90%',
             objectFit: 'cover',
           }}
           src={data.src}/>
         <p
           style={{
-            width: 500,
+            width: '90%',
           }}
           >{data.desc}</p>
           <form>
@@ -75,8 +74,10 @@ export default class Details extends Component {
             id="textarea"
             name="box"
             style={{
-              width: 360,
+              width: '90vw',
               height: 60,
+              display: 'block',
+              marginLeft: 0,
             }}
             placeholder="Type here to post a comment"
             ></textarea>

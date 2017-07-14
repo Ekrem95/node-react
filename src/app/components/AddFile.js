@@ -32,7 +32,7 @@ export default class AddFile extends Component {
   render() {
     return (
       <div>
-         <Dropzone ref="dropzone" multiple={false} accept={'image/*'} onDrop={this.onDrop} >
+         <Dropzone ref="dropzone" multiple={false} accept={'image/*'} onDrop={this.onDrop}>
            <div>Try dropping some files here, or click to select files to upload.</div>
          </Dropzone>
          <button type="button" onClick={this.onOpenClick}>

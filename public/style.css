@@ -210,14 +210,23 @@ textarea{
     color: #fff;
     text-decoration: none;
     text-align: center;
+    margin-bottom: 0;
   }
   .dashboardFirst{
     width: 400px;
     margin: 0;
   }
+  .dashboardFirst textarea{
+    width: 80vw;
+    margin-left: 36px;
+  }
   h1{
     text-align: center;
     margin-top: 60px;
+  }
+  .addfile{
+    text-align: center;
+    margin-top: 0px;
   }
   form{
     margin-top: 40px;
