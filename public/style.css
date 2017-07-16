@@ -171,6 +171,10 @@ textarea{
   color: #fff;
   border: none;
   height: 36px;
+  font-size: 1.5em;
+}
+.postform button:hover{
+  background-color: rgb(28, 121, 217);
 }
 @media (max-width: 600px) {
   html{
@@ -242,6 +246,10 @@ textarea{
     margin: 20px auto;
     font-size: 1.6em;
     width: 60%;
+  }
+  .postform button{
+    width: 42vw;
+    min-width: 260px;
   }
   .post{
     max-width: 500px;

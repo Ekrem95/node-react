@@ -64,7 +64,7 @@ export default class Nav extends Component {
             className="link"
             >Add</Link></li>
 
-          <li><a className="logout" href="logout">Logout</a></li>
+          <li><a className="logout" href="/logout">Logout</a></li>
           </div>
         }
 

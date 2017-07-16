@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { loggedIn } from '../helpers';
 
 export default class Dashboard extends Component {
   constructor() {
@@ -18,15 +19,7 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount(nextState, transition) {
-    axios.get('api/isloggedin')
-      .then(res => {
-        if (res.data == 'no') {
-          window.location.replace('/login');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    loggedIn();
   }
 
   componentDidMount(nextState, transition) {
