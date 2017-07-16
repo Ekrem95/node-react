@@ -28,14 +28,14 @@ export default class Edit extends Component {
   render () {
     const data = this.state.data.data;
     return (
-      <div>
+      <div style={{ textAlign: 'center', marginTop: 60 }}>
         <h1>Edit</h1>
         {data &&
 
             <form method="post" action="/p" className="addPost">
               <input defaultValue={data.title} type="text" name="title" placeholder="Title"/>
               <input defaultValue={data.desc} type="text" name="desc" placeholder="Description"/>
-              <input defaultValue={data.src} type="text" name="src" placeholder="Image Source"/>
+              <textarea defaultValue={data.src} type="text" name="src" placeholder="Image Source"></textarea>
               <button type="submit">Edit</button>
             </form>
 

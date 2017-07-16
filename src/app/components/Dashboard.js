@@ -102,6 +102,7 @@ export default class Dashboard extends Component {
 
   render() {
     return (
+      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', }}>
       <div className="dashboard" ref={this.scroll}>
         {this.state.user &&
           <div className="dashboardFirst">
@@ -113,7 +114,7 @@ export default class Dashboard extends Component {
             <textarea onChange={this.onChange}></textarea>
           </div>
         }
-
+        <div id="dashboard-content">
         { this.state.data.data &&
           this.state.data.data.map(post => {
             return (
@@ -131,10 +132,12 @@ export default class Dashboard extends Component {
             );
           })
         }
-        {
-          this.state.skip + 5 < this.state.length &&
-          <button onClick={this.loadMore}>Load More</button>
-        }
+        </div>
+      </div>
+      {
+        this.state.skip + 5 < this.state.length &&
+        <button id="load-more" onClick={this.loadMore}>Load More</button>
+      }
       </div>
     );
   }
