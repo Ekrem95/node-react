@@ -15,6 +15,7 @@ export default class Dashboard extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.loadMoreButton = this.loadMoreButton.bind(this);
     this.scroll = this.scroll.bind(this);
   }
 
@@ -78,11 +79,16 @@ export default class Dashboard extends Component {
     }
   }
 
-  loadMore() {
+  loadMoreButton() {
+    this.loadMore(5);
+  }
+
+  loadMore(val) {
     this.setState({
       skip: this.state.skip + 5,
     });
-    const skip = (this.state.skip).toString();
+
+    const skip = (this.state.skip + val).toString();
     axios.get('/api/posts/' + skip)
       .then(res => {
         const data = this.state.data;
@@ -106,7 +112,7 @@ export default class Dashboard extends Component {
     const self = this;
     window.onscroll = function (e) {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        self.loadMore();
+        self.loadMore(0);
       }
     };
   }
@@ -147,7 +153,7 @@ export default class Dashboard extends Component {
       </div>
       {
         this.state.skip + 5 < this.state.length &&
-        <button id="load-more" onClick={this.loadMore}>Load More</button>
+        <button id="load-more" onClick={this.loadMoreButton}>Load More</button>
       }
       </div>
     );
