@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { loggedIn } from '../helpers';
 
 export default class Dashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: {},
       user: {},
@@ -20,6 +20,13 @@ export default class Dashboard extends Component {
 
   componentWillMount(nextState, transition) {
     loggedIn();
+  }
+
+  componentWillUnmount () {
+    // this.onChange = null;
+    // this.loadMore = null;
+    this.scroll = this.onChange;
+    // self.loadMore = null;
   }
 
   componentDidMount(nextState, transition) {
@@ -76,7 +83,7 @@ export default class Dashboard extends Component {
       skip: this.state.skip + 5,
     });
     const skip = (this.state.skip).toString();
-    axios.get('api/posts/' + skip)
+    axios.get('/api/posts/' + skip)
       .then(res => {
         const data = this.state.data;
         res.data.forEach(post => {
@@ -92,13 +99,17 @@ export default class Dashboard extends Component {
   }
 
   scroll(node) {
+    if (!node) { console.log('done'); }
+
+    if (node) { console.log('node'); }
+
     const self = this;
     window.onscroll = function (e) {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         self.loadMore();
       }
     };
-  };
+  }
 
   render() {
     return (

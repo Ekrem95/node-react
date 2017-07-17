@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { loggedIn } from '../helpers';
 
 export default class Edit extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: {},
     };

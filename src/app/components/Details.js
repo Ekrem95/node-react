@@ -3,8 +3,8 @@ import axios from 'axios';
 import request from 'superagent';
 
 export default class Details extends Component {
-  constructor () {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: {},
     };

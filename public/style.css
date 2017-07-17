@@ -259,6 +259,11 @@ textarea{
 .postform button:hover{
   background-color: rgb(28, 121, 217);
 }
+@media (max-width: 1100px) {
+  .details img, .details p, .details textarea{
+    width: 60vw;
+  }
+}
 @media (max-width: 600px) {
   html{
     width: 100vw;
@@ -443,10 +448,7 @@ textarea{
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .details p, .details textarea{
-    width: 90vw;
-  }
-  .details img{
+  .details img, .details p, .details textarea{
     width: 90vw;
   }
 }

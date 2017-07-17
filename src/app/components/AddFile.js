@@ -5,8 +5,8 @@ import Dropzone from 'react-dropzone';
 var request = require('superagent');
 
 export default class AddFile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { files: [] };
     this.onDrop = this.onDrop.bind(this);
     this.onOpenClick = this.onOpenClick.bind(this);
