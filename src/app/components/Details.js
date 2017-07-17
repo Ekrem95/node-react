@@ -50,7 +50,9 @@ export default class Details extends Component {
     const data = this.state.data;
     //console.log(data);
     return (
-      <div style={{
+      <div
+        className="details"
+        style={{
         display: 'flex',
         flex: 1,
         alignItems: 'center',
@@ -59,22 +61,13 @@ export default class Details extends Component {
       }}>
         <h1>{data.title}</h1>
         <img
-          style={{
-            width: '90%',
-            objectFit: 'cover',
-          }}
           src={data.src}/>
-        <p
-          style={{
-            width: '90%',
-          }}
-          >{data.desc}</p>
+        <p>{data.desc}</p>
           <form>
           <textarea
             id="textarea"
             name="box"
             style={{
-              width: '90vw',
               height: 60,
               display: 'block',
               marginLeft: 0,

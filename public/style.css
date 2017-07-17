@@ -19,9 +19,8 @@ body{
 .nav{
   background: rgb(24, 85, 176);
 }
-.tumblr-img{
-  width: 39%;
-  margin: 3%;
+.details img, .details p, .details textarea{
+  width: 40vw;
 }
 .logout{
   position: absolute;
@@ -444,9 +443,10 @@ textarea{
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .tumblr-img{
-    width: 76%;
-    margin: 10px;
-    padding: 60px;
+  .details p, .details textarea{
+    width: 90vw;
+  }
+  .details img{
+    width: 90vw;
   }
 }
