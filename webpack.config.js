@@ -1,5 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+const production = process.env.NODE_ENV === 'production';
+const jsDev = [];
+const jsProduction = [
+  new UglifyJSPlugin(),
+];
 
 const APP_DIR = path.resolve(__dirname, 'src/app');
 const BUILT_DIR = path.resolve(__dirname, 'src/public');
@@ -10,6 +17,7 @@ const config = {
     path: BUILT_DIR,
     filename: 'bundle.js',
   },
+  //devtool: 'inline-sourcemap',
   module: {
     loaders: [
       {
@@ -23,8 +31,7 @@ const config = {
       },
     ],
   },
-  devtool: 'inline-sourcemap',
-  // devtool: '#source-map',
+  plugins: production ? jsProduction : jsDev,
 };
 
 module.exports = config;

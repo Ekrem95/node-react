@@ -8,7 +8,7 @@
     "serve": "nodemon -q app.js --exec babel-node --presets es2015,stage-2",
     "test": "mocha --compilers js:babel-register 'test/*.js'",
     "dev": "webpack -d --watch",
-    "build-r": "webpack -p"
+    "production": "NODE_ENV=production webpack -p"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -38,6 +38,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
     "eslint-config-rallycoding": "^3.2.0",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "uglifyjs-webpack-plugin": "^0.4.6"
   }
 }
