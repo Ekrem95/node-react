@@ -16,18 +16,23 @@ export default class Dashboard extends Component {
     this.onChange = this.onChange.bind(this);
     this.loadMore = this.loadMore.bind(this);
     this.loadMoreButton = this.loadMoreButton.bind(this);
-    this.scroll = this.scroll.bind(this);
   }
 
   componentWillMount(nextState, transition) {
     loggedIn();
+
+    const self = this;
+    window.onscroll = function () {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        self.loadMore(0);
+      }
+    };
   }
 
   componentWillUnmount () {
-    // this.onChange = null;
-    // this.loadMore = null;
-    this.scroll = this.onChange;
-    // self.loadMore = null;
+    window.onscroll = function () {
+      return;
+    };
   }
 
   componentDidMount(nextState, transition) {
@@ -104,23 +109,10 @@ export default class Dashboard extends Component {
       });
   }
 
-  scroll(node) {
-    if (!node) { console.log('done'); }
-
-    if (node) { console.log('node'); }
-
-    const self = this;
-    window.onscroll = function (e) {
-      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        self.loadMore(0);
-      }
-    };
-  }
-
   render() {
     return (
       <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', }}>
-      <div className="dashboard" ref={this.scroll}>
+      <div className="dashboard">
         {this.state.user &&
           <div className="dashboardFirst">
           <p className="passwordLink">
