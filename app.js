@@ -6,6 +6,7 @@ const compression = require('compression');
 const dotenv = require('dotenv');
 const favicon = require('serve-favicon');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 dotenv.load();
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(morgan('tiny'));
 app.use(compression());
+app.use(cors());
 
 app.use(require('./middleware/middleware').sessions);
 app.use(require('./middleware/middleware').userSession);

@@ -17,7 +17,7 @@ const config = {
     path: BUILT_DIR,
     filename: 'bundle.js',
   },
-  //devtool: 'inline-sourcemap',
+  devtool: production ? '' : 'inline-sourcemap',
   module: {
     loaders: [
       {
