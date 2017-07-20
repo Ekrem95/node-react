@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const tumblr = require('tumblr.js');
 const Post = require('../db/post');
 const User = require('../db/user');
 

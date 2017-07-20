@@ -272,8 +272,8 @@ textarea{
     font-size: .7em;
   }
   #app{
-    width: 100%;
-    min-width: 360px;
+    width: 100vw;
+    min-width: 320px;
     overflow-x: hidden;
   }
   /********************/
@@ -356,10 +356,9 @@ textarea{
         -ms-flex-align: center;
             align-items: center;
   }
-
   .indexImg{
-    width: 360px;
-    height: 360px;
+    width: 100vw;
+    height: 100vw;
     -o-object-fit: cover;
        object-fit: cover;
     -webkit-box-flex: 1;
@@ -373,7 +372,7 @@ textarea{
     margin-bottom: 0;
   }
   .dashboardFirst{
-    width: 400px;
+    width: 100vw;
     margin: 0;
   }
   .dashboardFirst textarea{
@@ -410,7 +409,7 @@ textarea{
   }
   .post{
     max-width: 500px;
-    width: 96%;
+    width: 100%;
     margin: 10px auto;
     min-height: 540px;
     position: relative;
