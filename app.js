@@ -21,8 +21,8 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(morgan('tiny'));
 app.use(cors());
 
-app.use(require('./middleware/middleware').sessions);
-app.use(require('./middleware/middleware').userSession);
+app.use(require('./middleware/session').sessions);
+app.use(require('./middleware/session').userSession);
 
 app.use('/api', require('./routes/api'));
 app.use('/', require('./routes/router'));

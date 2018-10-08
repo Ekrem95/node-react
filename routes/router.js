@@ -2,160 +2,131 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcryptjs');
-var multer = require('multer');
-const User = require('../db/user');
-const Post = require('../db/post');
+const multer = require('multer');
+const { Mongo, Post, User } = require('../db');
 
 router.get('/changepassword', (req, res) => {
-  if (!req.user) {
-    res.redirect('/login');
-  }
+    if (!req.user) return res.redirect('/login');
 
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
 router.get('/logout', (req, res) => {
-  req.session.reset();
-  res.redirect('/');
+    req.session.reset();
+    res.redirect('/');
 });
 
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
-});
+router.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')));
 
-router.post('/signup', (req, res) => {
-  var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-  var user = new User({
-    email: req.body.email,
-    password: hash,
-  });
-  user.save(err => {
-    if (err) {
-      if (err.code === 11000) {
-        var error = 'That email is already taken';
-      }
+router.post('/signup', async (req, res) => {
+    try {
+        const hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-      res.send({ error: err });
-    }else {
-      req.session.user = user;
-      res.redirect('/dashboard');
-    }
-  });
-});
+        const newUser = await Mongo.save(User, { email: req.body.email, password: hash });
 
-router.post('/login', (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (err) console.log(err);
-    if (!user) {
-      res.send({ error: 'No user' });
-    }else {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        req.session.user = user;
+        req.session.user = newUser;
         res.redirect('/dashboard');
-      }else {
-        res.redirect('login');
-      }
+    } catch (err) {
+        if (err.code === 11000) return res.status(400).json({ err: 'Email is already taken' });
+
+        res.status(400).json({ err });
     }
-  });
 });
 
-router.post('/p', (req, res) => {
-  const id = req.headers.referer.split('/').pop();
-  Post.update({
-    _id: id,
-  }, {
-    $set: {
-      title: req.body.title,
-      desc: req.body.desc,
-      src: req.body.src,
-    }, },
-{ upsert: false }, function (err, doc) {
-    if (err) console.log(err);
-  });
+router.post('/login', async (req, res) => {
+    try {
+        const user = await Mongo.findOne(User, { email: req.body.email });
 
-  res.redirect('/dashboard');
-});
+        if (!user) return res.status(400).send({ error: 'User does not exist' });
 
-router.post('/p/d', (req, res) => {
-  if (req.body.box.length > 0) {
-    const id = req.body.id || req.headers.referer.split('/').pop();
-    Post.update({
-      _id: id,
-    }, {
-      $push: {
-        comments: req.body.box,
-      }, },
-    { upsert: false }, function (err, doc) {
-      if (err) console.log(err);
-    });
-
-    res.redirect('/dashboard');
-  } else {
-    res.redirect('/dashboard');
-  }
-});
-
-router.post('/add', (req, res) => {
-  var post = new Post({
-    title: req.body.title,
-    src: req.body.src,
-    desc: req.body.desc,
-  });
-  post.save(err => {
-    if (err) {
-      console.log(err);
-      res.redirect('/dashboard');
-    }else {
-      //req.session.user = user;
-      res.redirect('/dashboard');
-    }
-  });
-});
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/pictures');
-  },
-
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-var upload = multer({ storage: storage });
-
-router.post('/add/file', upload.any(), (req, res) => {
-  res.redirect('/');
-});
-
-router.post('/changepassword', (req, res) => {
-  User.findOne({ email: req.user.email }, (err, user) => {
-    if (err) console.log(err);
-    if (!user) {
-      res.send({ error: 'No user' });
-    }else {
-      if (bcrypt.compareSync(req.body.old, user.password)) {
-        if (req.body.new === req.body.assert) {
-          var hash = bcrypt.hashSync(req.body.new, bcrypt.genSaltSync(10));
-          User.update({
-            _id: req.user._id,
-          }, {
-            $set: {
-              password: hash,
-            }, },
-          { upsert: false }, function (err, doc) {
-              if (err) console.log(err);
-            });
-
-          res.redirect('/logout');
-        }else {
-          res.redirect('/changepassword');
+        // if operation is successful, redirect user to dashboard
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+            req.session.user = user;
+            return res.redirect('/dashboard');
         }
-      }else {
-        res.redirect('changepassword');
-      }
+
+        res.redirect('login');
+    } catch (error) {
+        res.status(400).json({ error });
     }
-  });
 });
+
+// Update a post
+router.post('/p', async (req, res) => {
+    const id = req.headers.referer.split('/').pop();
+    const { title, desc, src } = req.body;
+
+    try {
+        await Mongo.update(Post, { criteria: { _id: id }, data: { title, desc, src } });
+    } catch (err) {
+    } finally {
+        res.redirect('/dashboard');
+    }
+});
+
+// add a comment
+router.post('/p/d', async (req, res) => {
+    const id = req.body.id || req.headers.referer.split('/').pop();
+    const comments = req.body.box;
+
+    try {
+        await Mongo.update(Post, { criteria: { _id: id }, data: { $push: { comments } } });
+    } catch (err) {
+    } finally {
+        res.redirect('/dashboard');
+    }
+});
+
+// Add a post
+router.post('/add', async (req, res) => {
+    try {
+        const newPost = await Mongo.save(Post, {
+            title: req.body.title,
+            src: req.body.src,
+            desc: req.body.desc,
+        });
+    } catch (err) {
+    } finally {
+        res.redirect('/dashboard');
+    }
+});
+
+router.post('/changepassword', async (req, res) => {
+    try {
+        const user = await Mongo.findOne(User, { email: req.user.email });
+
+        if (!user) return res.status(400).send({ error: 'User does not exist' });
+
+        // if passwords does not match, redirect user to try again
+        if (!bcrypt.compareSync(req.body.old, user.password)) {
+            return res.redirect('changepassword');
+        }
+
+        // double check the new password
+        if (req.body.new !== req.body.assert) return res.redirect('/changepassword');
+
+        const hash = bcrypt.hashSync(req.body.new, bcrypt.genSaltSync(10));
+
+        await Mongo.update(User, { criteria: { _id: req.user._id }, data: { password: hash } });
+
+        // logout after changing password
+        res.redirect('/logout');
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+});
+
+const upload = multer({ storage });
+// Set multer storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
+
+router.post('/add/file', upload.any(), (req, res) => res.redirect('/'));
 
 module.exports = router;
