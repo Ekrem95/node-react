@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
-const { Mongo, Post, User } = require('../db');
+const { Post, User } = require('../db');
 
 router.get('/changepassword', (req, res) => {
     if (!req.user) return res.redirect('/login');
@@ -22,7 +22,7 @@ router.post('/signup', async (req, res) => {
     try {
         const hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-        const newUser = await Mongo.save(User, { email: req.body.email, password: hash });
+        const newUser = await User.save({ email: req.body.email, password: hash });
 
         req.session.user = newUser;
         res.redirect('/dashboard');
@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const user = await Mongo.findOne(User, { email: req.body.email });
+        const user = await User.findOne({ email: req.body.email });
 
         if (!user) return res.status(400).send({ error: 'User does not exist' });
 
@@ -57,7 +57,7 @@ router.post('/p', async (req, res) => {
     const { title, desc, src } = req.body;
 
     try {
-        await Mongo.update(Post, { criteria: { _id: id }, data: { title, desc, src } });
+        await Post.update({ criteria: { _id: id }, data: { title, desc, src } });
     } catch (err) {
     } finally {
         res.redirect('/dashboard');
@@ -70,7 +70,7 @@ router.post('/p/d', async (req, res) => {
     const comments = req.body.box;
 
     try {
-        await Mongo.update(Post, { criteria: { _id: id }, data: { $push: { comments } } });
+        await Post.update({ criteria: { _id: id }, data: { $push: { comments } } });
     } catch (err) {
     } finally {
         res.redirect('/dashboard');
@@ -80,7 +80,7 @@ router.post('/p/d', async (req, res) => {
 // Add a post
 router.post('/add', async (req, res) => {
     try {
-        const newPost = await Mongo.save(Post, {
+        const newPost = await Post.save({
             title: req.body.title,
             src: req.body.src,
             desc: req.body.desc,
@@ -93,7 +93,7 @@ router.post('/add', async (req, res) => {
 
 router.post('/changepassword', async (req, res) => {
     try {
-        const user = await Mongo.findOne(User, { email: req.user.email });
+        const user = await User.findOne({ email: req.user.email });
 
         if (!user) return res.status(400).send({ error: 'User does not exist' });
 
@@ -107,7 +107,7 @@ router.post('/changepassword', async (req, res) => {
 
         const hash = bcrypt.hashSync(req.body.new, bcrypt.genSaltSync(10));
 
-        await Mongo.update(User, { criteria: { _id: req.user._id }, data: { password: hash } });
+        await User.update({ criteria: { _id: req.user._id }, data: { password: hash } });
 
         // logout after changing password
         res.redirect('/logout');

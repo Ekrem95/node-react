@@ -1,4 +1,4 @@
-# node-react
+## node-react
 
 Node.js app with React front-end.
 
@@ -15,7 +15,7 @@ Yarn (optional)
 ```
 yarn
 docker-compose up
-yarn dev
+yarn prod
 yarn serve
 ```
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Lib = require('./lib').default;
 
 const User = mongoose.model(
     'User',
@@ -10,4 +11,4 @@ const User = mongoose.model(
     })
 );
 
-module.exports = User;
+module.exports = new Lib(User);

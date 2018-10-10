@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Post = require('./post');
 const User = require('./user');
-const Mongo = require('./lib');
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect(
@@ -9,4 +8,4 @@ mongoose.connect(
     { useNewUrlParser: true }
 );
 
-module.exports = { Mongo, Post, User };
+module.exports = { Post, User };

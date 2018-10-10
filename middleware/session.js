@@ -1,5 +1,5 @@
 var sessions = require('client-sessions');
-const { Mongo, User } = require('../db');
+const { User } = require('../db');
 
 module.exports.sessions = sessions({
     cookieName: 'session',
@@ -19,7 +19,7 @@ module.exports.requireLogin = (req, res, next) => {
 
 module.exports.userSession = async (req, res, next) => {
     if (req.session && req.session.user) {
-        const user = await Mongo.findOne(User, { email: req.session.user.email });
+        const user = await User.findOne({ email: req.session.user.email });
 
         if (user) {
             req.user = user;
